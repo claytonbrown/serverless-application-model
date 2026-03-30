@@ -196,6 +196,11 @@ class Domain(BaseModel):
     EndpointConfiguration: Optional[SamIntrinsicable[Literal["REGIONAL", "EDGE", "PRIVATE"]]] = domain(
         "EndpointConfiguration"
     )
+    EndpointAccessMode: Optional[PassThroughProp] = passthrough_prop(
+        DOMAIN_STEM,
+        "EndpointAccessMode",
+        ["AWS::ApiGateway::DomainName", "Properties", "EndpointAccessMode"],
+    )
     IpAddressType: Optional[PassThroughProp]  # TODO: add documentation; currently unavailable
     MutualTlsAuthentication: Optional[PassThroughProp] = passthrough_prop(
         DOMAIN_STEM,
@@ -306,6 +311,11 @@ class Properties(BaseModel):
     )
     DisableExecuteApiEndpoint: Optional[PassThroughProp] = properties("DisableExecuteApiEndpoint")
     Domain: Optional[Domain] = properties("Domain")
+    EndpointAccessMode: Optional[PassThroughProp] = passthrough_prop(
+        PROPERTIES_STEM,
+        "EndpointAccessMode",
+        ["AWS::ApiGateway::RestApi", "Properties", "EndpointAccessMode"],
+    )
     EndpointConfiguration: Optional[EndpointConfigurationType] = properties("EndpointConfiguration")
     FailOnWarnings: Optional[PassThroughProp] = passthrough_prop(
         PROPERTIES_STEM,
@@ -418,6 +428,11 @@ class Globals(BaseModel):
         PROPERTIES_STEM,
         "SecurityPolicy",
         ["AWS::ApiGateway::RestApi", "Properties", "SecurityPolicy"],
+    )
+    EndpointAccessMode: Optional[PassThroughProp] = passthrough_prop(
+        PROPERTIES_STEM,
+        "EndpointAccessMode",
+        ["AWS::ApiGateway::RestApi", "Properties", "EndpointAccessMode"],
     )
 
 
