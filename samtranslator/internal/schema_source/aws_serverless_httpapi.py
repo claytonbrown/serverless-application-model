@@ -10,7 +10,6 @@ from samtranslator.internal.schema_source.common import (
     ResourceAttributes,
     SamIntrinsicable,
     get_prop,
-    passthrough_prop,
 )
 
 oauth2authorizer = get_prop("sam-property-httpapi-oauth2authorizer")
@@ -19,8 +18,8 @@ lambdaauthorizer = get_prop("sam-property-httpapi-lambdaauthorizer")
 auth = get_prop("sam-property-httpapi-httpapiauth")
 corsconfiguration = get_prop("sam-property-httpapi-httpapicorsconfiguration")
 definitionuri = get_prop("sam-property-httpapi-httpapidefinition")
-route53 = get_prop("sam-property-httpapi-route53configuration")
-domain = get_prop("sam-property-httpapi-httpapidomainconfiguration")
+route53 = get_prop("sam-property-gatewayv2-route53configuration")
+domain = get_prop("sam-property-gatewayv2-domainconfiguration")
 properties = get_prop("sam-resource-httpapi")
 
 
@@ -78,16 +77,8 @@ class Route53(BaseModel):
     HostedZoneId: PassThroughProp | None = route53("HostedZoneId")
     HostedZoneName: PassThroughProp | None = route53("HostedZoneName")
     IpV6: bool | None = route53("IpV6")
-    SetIdentifier: PassThroughProp | None = passthrough_prop(
-        "sam-property-httpapi-route53configuration",
-        "SetIdentifier",
-        ["AWS::Route53::RecordSetGroup.RecordSet", "SetIdentifier"],
-    )
-    Region: PassThroughProp | None = passthrough_prop(
-        "sam-property-httpapi-route53configuration",
-        "Region",
-        ["AWS::Route53::RecordSetGroup.RecordSet", "Region"],
-    )
+    SetIdentifier: PassThroughProp | None = route53("SetIdentifier")
+    Region: PassThroughProp | None = route53("Region")
 
 
 class Domain(BaseModel):

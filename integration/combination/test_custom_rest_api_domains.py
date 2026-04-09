@@ -1,7 +1,11 @@
 from unittest.case import skipIf
 
 from integration.config.service_names import CUSTOM_DOMAIN
-from integration.helpers.base_internal_test import CUSTOM_DOMAIN_TOP_LEVEL, BaseInternalTest
+from integration.helpers.base_internal_test import (
+    CUSTOM_DOMAIN_TOP_LEVEL,
+    FEATURE_TOGGLE_CUSTOM_DOMAIN_TOP_LEVEL,
+    BaseInternalTest,
+)
 from integration.helpers.base_test import nonblocking
 from integration.helpers.resource import current_region_not_included
 
@@ -23,7 +27,7 @@ class TestCustomRestApiDomains(BaseInternalTest):
         result = api_gateway_client.get_domain_name(domainName=domain_name_id)
 
         if "FeatureToggle" in self.pipeline_prefix:
-            self.assertEqual("ftl.sam-gamma-edge.com", result["domainName"])
+            self.assertEqual(f"sam-gamma-edge.{FEATURE_TOGGLE_CUSTOM_DOMAIN_TOP_LEVEL}", result["domainName"])
         else:
             self.assertEqual(f"sam-gamma-edge.{CUSTOM_DOMAIN_TOP_LEVEL}", result["domainName"])
 
@@ -44,7 +48,7 @@ class TestCustomRestApiDomains(BaseInternalTest):
         result = api_gateway_client.get_domain_name(domainName=domain_name_id)
 
         if "FeatureToggle" in self.pipeline_prefix:
-            self.assertEqual("ftl.sam-gamma-regional.com", result["domainName"])
+            self.assertEqual(f"sam-gamma-regional.{FEATURE_TOGGLE_CUSTOM_DOMAIN_TOP_LEVEL}", result["domainName"])
         else:
             self.assertEqual(f"sam-gamma-regional.{CUSTOM_DOMAIN_TOP_LEVEL}", result["domainName"])
 

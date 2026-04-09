@@ -5,6 +5,7 @@ import pytest
 from integration.helpers.base_test import BaseTest
 
 CUSTOM_DOMAIN_TOP_LEVEL = "tooling.lambda.aws.dev"
+FEATURE_TOGGLE_CUSTOM_DOMAIN_TOP_LEVEL = "ftl.tooling.lambda.aws.dev"
 
 
 class BaseInternalTest(BaseTest):

@@ -20,6 +20,7 @@ from samtranslator.internal.schema_source import (
     aws_serverless_layerversion,
     aws_serverless_simpletable,
     aws_serverless_statemachine,
+    aws_serverless_websocketapi,
 )
 from samtranslator.internal.schema_source.common import BaseModel, LenientBaseModel
 
@@ -28,6 +29,7 @@ class Globals(BaseModel):
     Function: aws_serverless_function.Globals | None
     Api: aws_serverless_api.Globals | None
     HttpApi: aws_serverless_httpapi.Globals | None
+    WebSocketApi: aws_serverless_websocketapi.Globals | None
     SimpleTable: aws_serverless_simpletable.Globals | None
     StateMachine: aws_serverless_statemachine.Globals | None
     LayerVersion: aws_serverless_layerversion.Globals | None
@@ -42,6 +44,7 @@ Resources = Union[
     aws_serverless_layerversion.Resource,
     aws_serverless_api.Resource,
     aws_serverless_httpapi.Resource,
+    aws_serverless_websocketapi.Resource,
     aws_serverless_application.Resource,
     aws_serverless_graphqlapi.Resource,
     aws_serverless_capacity_provider.Resource,

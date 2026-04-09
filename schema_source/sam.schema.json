@@ -154,6 +154,67 @@
       "title": "ApiKey",
       "type": "object"
     },
+    "AuthConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "AuthArn": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "AuthArn"
+        },
+        "AuthType": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "AuthType"
+        },
+        "IdentitySource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "IdentitySource"
+        },
+        "InvokeRole": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "InvokeRole"
+        },
+        "Name": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "Name"
+        }
+      },
+      "required": [
+        "AuthType"
+      ],
+      "title": "AuthConfig",
+      "type": "object"
+    },
     "Authorizer": {
       "additionalProperties": false,
       "properties": {
@@ -4172,6 +4233,91 @@
       "title": "VpcConfig",
       "type": "object"
     },
+    "WebSocketApiRoute": {
+      "additionalProperties": false,
+      "properties": {
+        "ApiKeyRequired": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "ApiKeyRequired"
+        },
+        "FunctionArn": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "FunctionArn"
+        },
+        "IntegrationTimeout": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "IntegrationTimeout"
+        },
+        "ModelSelectionExpression": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "ModelSelectionExpression"
+        },
+        "OperationName": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "OperationName"
+        },
+        "RequestModels": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "RequestModels"
+        },
+        "RequestParameters": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "RequestParameters"
+        },
+        "RouteResponseSelectionExpression": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "RouteResponseSelectionExpression"
+        }
+      },
+      "required": [
+        "FunctionArn"
+      ],
+      "title": "WebSocketApiRoute",
+      "type": "object"
+    },
     "__main____Globals": {
       "additionalProperties": false,
       "properties": {
@@ -4195,6 +4341,9 @@
         },
         "StateMachine": {
           "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_statemachine__Globals"
+        },
+        "WebSocketApi": {
+          "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_websocketapi__Globals"
         }
       },
       "title": "Globals",
@@ -8364,7 +8513,7 @@
           "items": {
             "type": "string"
           },
-          "markdownDescription": "A list of the basepaths to configure with the Amazon API Gateway domain name.  \n*Type*: List  \n*Required*: No  \n*Default*: /  \n*CloudFormation compatibility*: This property is similar to the [`ApiMappingKey`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-apimapping.html#cfn-apigatewayv2-apimapping-apimappingkey) property of an `AWS::ApiGatewayV2::ApiMapping` resource. AWS SAM creates multiple `AWS::ApiGatewayV2::ApiMapping` resources, one per value specified in this property.",
+          "markdownDescription": "A list of the basepaths to configure with the Amazon API Gateway domain name\\.  \n*Type*: List  \n*Required*: No  \n*Default*: /  \n*AWS CloudFormation compatibility*: This property is similar to the [`ApiMappingKey`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-apimapping.html#cfn-apigatewayv2-apimapping-apimappingkey) property of an `AWS::ApiGatewayV2::ApiMapping` resource\\. AWS SAM creates multiple `AWS::ApiGatewayV2::ApiMapping` resources, one per value specified in this property\\.",
           "title": "BasePath",
           "type": "array"
         },
@@ -8374,7 +8523,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The Amazon Resource Name (https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/ARN.html) of an AWS managed certificate for this domain name's endpoint. AWS Certificate Manager is the only supported source.  \n*Type*: String  \n*Required*: Yes  \n*CloudFormation compatibility*: This property is passed directly to the [`CertificateArn`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-domainname-domainnameconfiguration.html#cfn-apigatewayv2-domainname-domainnameconfiguration-certificatearn) property of an `AWS::ApiGateway2::DomainName DomainNameConfiguration` resource.",
+          "markdownDescription": "The Amazon Resource Name \\(ARN\\) of an AWS managed certificate for this domain name's endpoint\\. AWS Certificate Manager is the only supported source\\.  \n*Type*: String  \n*Required*: Yes  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`CertificateArn`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-domainname-domainnameconfiguration.html#cfn-apigatewayv2-domainname-domainnameconfiguration-certificatearn) property of an `AWS::ApiGateway2::DomainName DomainNameConfiguration` resource\\.",
           "title": "CertificateArn"
         },
         "DomainName": {
@@ -8383,7 +8532,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The custom domain name for your API Gateway API. Uppercase letters are not supported.  \nAWS SAM generates an `AWS::ApiGatewayV2::DomainName` resource when this property is set. For information about this scenario, see [DomainName property is specified](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-httpapi.html#sam-specification-generated-resources-httpapi-domain-name). For information about generated CloudFormation resources, see [Generated CloudFormation resources for AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources.html).  \n*Type*: String  \n*Required*: Yes  \n*CloudFormation compatibility*: This property is passed directly to the [`DomainName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-domainname) property of an `AWS::ApiGateway2::DomainName` resource.",
+          "markdownDescription": "The custom domain name for your API Gateway API\\. Uppercase letters are not supported\\.  \nAWS SAM generates an `AWS::ApiGatewayV2::DomainName` resource when this property is set\\. For information about this scenario, see [DomainName property is specified](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-httpapi.html#sam-specification-generated-resources-httpapi-domain-name)\\. For information about generated AWS CloudFormation resources, see [Generated AWS CloudFormation resources for AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources.html)\\.  \n*Type*: String  \n*Required*: Yes  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`DomainName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-domainname) property of an `AWS::ApiGateway2::DomainName` resource\\.",
           "title": "DomainName"
         },
         "EndpointConfiguration": {
@@ -8398,7 +8547,7 @@
               "type": "string"
             }
           ],
-          "markdownDescription": "Defines the type of API Gateway endpoint to map to the custom domain. The value of this property determines how the `CertificateArn` property is mapped in CloudFormation.  \nThe only valid value for HTTP APIs is `REGIONAL`.  \n*Type*: String  \n*Required*: No  \n*Default*: `REGIONAL`  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Defines the type of API Gateway endpoint to map to the custom domain\\. The value of this property determines how the `CertificateArn` property is mapped in AWS CloudFormation\\.  \nThe only valid value for HTTP APIs is `REGIONAL`\\.  \n*Type*: String  \n*Required*: No  \n*Default*: `REGIONAL`  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "EndpointConfiguration"
         },
         "MutualTlsAuthentication": {
@@ -8407,7 +8556,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The mutual transport layer security (https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/TLS.html) authentication configuration for a custom domain name.  \n*Type*: [MutualTlsAuthentication](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-mutualtlsauthentication)  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`MutualTlsAuthentication`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-mutualtlsauthentication) property of an `AWS::ApiGatewayV2::DomainName` resource.",
+          "markdownDescription": "The mutual transport layer security \\(TLS\\) authentication configuration for a custom domain name\\.  \n*Type*: [MutualTlsAuthentication](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-mutualtlsauthentication)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`MutualTlsAuthentication`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-mutualtlsauthentication) property of an `AWS::ApiGatewayV2::DomainName` resource\\.",
           "title": "MutualTlsAuthentication"
         },
         "OwnershipVerificationCertificateArn": {
@@ -8416,7 +8565,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Required only when you configure mutual TLS and you specify an ACM imported or private CA certificate ARN for the `CertificateArn`.  \n*Type*: String  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`OwnershipVerificationCertificateArn`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-domainname-domainnameconfiguration.html#cfn-apigatewayv2-domainname-domainnameconfiguration-ownershipverificationcertificatearn) property of the `AWS::ApiGatewayV2::DomainName` `DomainNameConfiguration` data type.",
+          "markdownDescription": "The ARN of the public certificate issued by ACM to validate ownership of your custom domain\\. Required only when you configure mutual TLS and you specify an ACM imported or private CA certificate ARN for the `CertificateArn`\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`OwnershipVerificationCertificateArn`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-domainname-domainnameconfiguration.html#cfn-apigatewayv2-domainname-domainnameconfiguration-ownershipverificationcertificatearn) property of the `AWS::ApiGatewayV2::DomainName` `DomainNameConfiguration` data type\\.",
           "title": "OwnershipVerificationCertificateArn"
         },
         "Route53": {
@@ -8425,7 +8574,7 @@
               "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_httpapi__Route53"
             }
           ],
-          "markdownDescription": "Defines an Amazon Route\u00a053 configuration.  \n*Type*: [Route53Configuration](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-route53configuration.html)  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Defines an Amazon Route\u00a053 configuration\\.  \n*Type*: [Route53Configuration](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-route53configuration.html)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "Route53"
         },
         "SecurityPolicy": {
@@ -8434,7 +8583,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The TLS version of the security policy for this domain name.  \nThe only valid value for HTTP APIs is `TLS_1_2`.  \n*Type*: String  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`SecurityPolicy`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-domainname-domainnameconfiguration.html#cfn-apigatewayv2-domainname-domainnameconfiguration-securitypolicy) property of the `AWS::ApiGatewayV2::DomainName` `DomainNameConfiguration` data type.",
+          "markdownDescription": "The TLS version of the security policy for this domain name\\.  \nThe only valid value for HTTP APIs is `TLS_1_2`\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`SecurityPolicy`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-domainname-domainnameconfiguration.html#cfn-apigatewayv2-domainname-domainnameconfiguration-securitypolicy) property of the `AWS::ApiGatewayV2::DomainName` `DomainNameConfiguration` data type\\.",
           "title": "SecurityPolicy"
         }
       },
@@ -8454,7 +8603,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The settings for access logging in a stage.  \n*Type*: [AccessLogSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-accesslogsettings)  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`AccessLogSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-accesslogsettings) property of an `AWS::ApiGatewayV2::Stage` resource.",
+          "markdownDescription": "The settings for access logging in a stage\\.  \n*Type*: [AccessLogSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-accesslogsettings)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`AccessLogSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-accesslogsettings) property of an `AWS::ApiGatewayV2::Stage` resource\\.",
           "title": "AccessLogSettings"
         },
         "Auth": {
@@ -8463,7 +8612,7 @@
               "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_httpapi__Auth"
             }
           ],
-          "markdownDescription": "Configures authorization for controlling access to your API Gateway HTTP API.  \nFor more information, see [Controlling access to HTTP APIs with JWT authorizers](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-jwt-authorizer.html) in the *API Gateway Developer Guide*.  \n*Type*: [HttpApiAuth](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapiauth.html)  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Configures authorization for controlling access to your API Gateway HTTP API\\.  \nFor more information, see [Controlling access to HTTP APIs with JWT authorizers](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-jwt-authorizer.html) in the *API Gateway Developer Guide*\\.  \n*Type*: [HttpApiAuth](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapiauth.html)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "Auth"
         },
         "CorsConfiguration": {
@@ -8472,7 +8621,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "Manages cross-origin resource sharing (https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/CORS.html) for all your API Gateway HTTP APIs. Specify the domain to allow as a string, or specify an `HttpApiCorsConfiguration` object. Note that https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/CORS.html requires AWS SAM to modify your OpenAPI definition, so https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/CORS.html works only if the `DefinitionBody` property is specified.  \nFor more information, see [Configuring https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/CORS.html for an HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html) in the *API Gateway Developer Guide*.  \nIf `CorsConfiguration` is set both in an OpenAPI definition and at the property level, then AWS SAM merges both configuration sources with the properties taking precedence. If this property is set to `true`, then all origins are allowed.\n*Type*: String \\$1 [HttpApiCorsConfiguration](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapicorsconfiguration.html)  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Manages cross\\-origin resource sharing \\(CORS\\) for all your API Gateway HTTP APIs\\. Specify the domain to allow as a string, or specify an `HttpApiCorsConfiguration` object\\. Note that CORS requires AWS SAM to modify your OpenAPI definition, so CORS works only if the `DefinitionBody` property is specified\\.  \nFor more information, see [Configuring CORS for an HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html) in the *API Gateway Developer Guide*\\.  \nIf `CorsConfiguration` is set both in an OpenAPI definition and at the property level, then AWS SAM merges both configuration sources with the properties taking precedence\\. If this property is set to `true`, then all origins are allowed\\.\n*Type*: String \\| [HttpApiCorsConfiguration](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapicorsconfiguration.html)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "CorsConfiguration"
         },
         "DefaultRouteSettings": {
@@ -8481,7 +8630,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The default route settings for this HTTP API. These settings apply to all routes unless overridden by the `RouteSettings` property for certain routes.  \n*Type*: [RouteSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings)  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`RouteSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings) property of an `AWS::ApiGatewayV2::Stage` resource.",
+          "markdownDescription": "The default route settings for this HTTP API\\. These settings apply to all routes unless overridden by the `RouteSettings` property for certain routes\\.  \n*Type*: [RouteSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`RouteSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings) property of an `AWS::ApiGatewayV2::Stage` resource\\.",
           "title": "DefaultRouteSettings"
         },
         "Domain": {
@@ -8490,7 +8639,7 @@
               "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_httpapi__Domain"
             }
           ],
-          "markdownDescription": "Configures a custom domain for this API Gateway HTTP API.  \n*Type*: [HttpApiDomainConfiguration](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapidomainconfiguration.html)  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Configures a custom domain for this API Gateway HTTP API\\.  \n*Type*: [HttpApiDomainConfiguration](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapidomainconfiguration.html)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "Domain"
         },
         "FailOnWarnings": {
@@ -8499,11 +8648,11 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "Specifies whether to roll back the HTTP API creation (`true`) or not (`false`) when a warning is encountered. The default value is `false`.  \n*Type*: Boolean  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`FailOnWarnings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-failonwarnings) property of an `AWS::ApiGatewayV2::Api` resource.",
+          "markdownDescription": "Specifies whether to roll back the HTTP API creation \\(`true`\\) or not \\(`false`\\) when a warning is encountered\\. The default value is `false`\\.  \n*Type*: Boolean  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`FailOnWarnings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-failonwarnings) property of an `AWS::ApiGatewayV2::Api` resource\\.",
           "title": "FailOnWarnings"
         },
         "PropagateTags": {
-          "markdownDescription": "Indicate whether or not to pass tags from the `Tags` property to your [AWS::Serverless::HttpApi](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-httpapi.html) generated resources. Specify `True` to propagate tags in your generated resources.  \n*Type*: Boolean  \n*Required*: No  \n*Default*: `False`  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Indicate whether or not to pass tags from the `Tags` property to your [AWS::Serverless::HttpApi](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-httpapi.html) generated resources\\. Specify `True` to propagate tags in your generated resources\\.  \n*Type*: Boolean  \n*Required*: No  \n*Default*: `False`  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "PropagateTags",
           "type": "boolean"
         },
@@ -8513,7 +8662,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The route settings, per route, for this HTTP API. For more information, see [Working with routes for HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-routes.html) in the *API Gateway Developer Guide*.  \n*Type*: [RouteSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings)  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`RouteSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings) property of an `AWS::ApiGatewayV2::Stage` resource.",
+          "markdownDescription": "The route settings, per route, for this HTTP API\\. For more information, see [Working with routes for HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-routes.html) in the *API Gateway Developer Guide*\\.  \n*Type*: [RouteSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`RouteSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings) property of an `AWS::ApiGatewayV2::Stage` resource\\.",
           "title": "RouteSettings"
         },
         "StageVariables": {
@@ -8522,11 +8671,11 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "A map that defines the stage variables. Variable names can have alphanumeric and underscore characters. The values must match [A-Za-z0-9-.\\$1\\$1:/?\\$1&=,]\\$1.  \n*Type*: [Json](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-stagevariables)  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`StageVariables`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-stagevariables) property of an `AWS::ApiGatewayV2::Stage` resource.",
+          "markdownDescription": "A map that defines the stage variables\\. Variable names can have alphanumeric and underscore characters\\. The values must match \\[A\\-Za\\-z0\\-9\\-\\.\\_\\~:/?\\#&=,\\]\\+\\.  \n*Type*: [Json](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-stagevariables)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`StageVariables`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-stagevariables) property of an `AWS::ApiGatewayV2::Stage` resource\\.",
           "title": "StageVariables"
         },
         "Tags": {
-          "markdownDescription": "A map (string to string) that specifies the tags to add to this API Gateway stage. Keys can be 1 to 128 Unicode characters in length and cannot include the prefix `aws:`. You can use any of the following characters: the set of Unicode letters, digits, whitespace, `_`, `.`, `/`, `=`, `+`, and `-`. Values can be 1 to 256 Unicode characters in length.  \n*Type*: Map  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.  \n*Additional notes*: The `Tags` property requires AWS SAM to modify your OpenAPI definition, so tags are added only if the `DefinitionBody` property is specified\u2014no tags are added if the `DefinitionUri` property is specified. AWS SAM automatically adds an `httpapi:createdBy:SAM` tag. Tags are also added to the `AWS::ApiGatewayV2::Stage` resource and the `AWS::ApiGatewayV2::DomainName` resource (if `DomainName` is specified).",
+          "markdownDescription": "A map \\(string to string\\) that specifies the tags to add to this API Gateway stage\\. Keys can be 1 to 128 Unicode characters in length and cannot include the prefix `aws:`\\. You can use any of the following characters: the set of Unicode letters, digits, whitespace, `_`, `.`, `/`, `=`, `+`, and `-`\\. Values can be 1 to 256 Unicode characters in length\\.  \n*Type*: Map  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.  \n*Additional notes*: The `Tags` property requires AWS SAM to modify your OpenAPI definition, so tags are added only if the `DefinitionBody` property is specified\u2014no tags are added if the `DefinitionUri` property is specified\\. AWS SAM automatically adds an `httpapi:createdBy:SAM` tag\\. Tags are also added to the `AWS::ApiGatewayV2::Stage` resource and the `AWS::ApiGatewayV2::DomainName` resource \\(if `DomainName` is specified\\)\\.",
           "title": "Tags",
           "type": "object"
         }
@@ -8543,7 +8692,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The settings for access logging in a stage.  \n*Type*: [AccessLogSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-accesslogsettings)  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`AccessLogSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-accesslogsettings) property of an `AWS::ApiGatewayV2::Stage` resource.",
+          "markdownDescription": "The settings for access logging in a stage\\.  \n*Type*: [AccessLogSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-accesslogsettings)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`AccessLogSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-accesslogsettings) property of an `AWS::ApiGatewayV2::Stage` resource\\.",
           "title": "AccessLogSettings"
         },
         "Auth": {
@@ -8552,7 +8701,7 @@
               "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_httpapi__Auth"
             }
           ],
-          "markdownDescription": "Configures authorization for controlling access to your API Gateway HTTP API.  \nFor more information, see [Controlling access to HTTP APIs with JWT authorizers](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-jwt-authorizer.html) in the *API Gateway Developer Guide*.  \n*Type*: [HttpApiAuth](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapiauth.html)  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Configures authorization for controlling access to your API Gateway HTTP API\\.  \nFor more information, see [Controlling access to HTTP APIs with JWT authorizers](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-jwt-authorizer.html) in the *API Gateway Developer Guide*\\.  \n*Type*: [HttpApiAuth](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapiauth.html)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "Auth"
         },
         "CorsConfiguration": {
@@ -8561,7 +8710,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "Manages cross-origin resource sharing (https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/CORS.html) for all your API Gateway HTTP APIs. Specify the domain to allow as a string, or specify an `HttpApiCorsConfiguration` object. Note that https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/CORS.html requires AWS SAM to modify your OpenAPI definition, so https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/CORS.html works only if the `DefinitionBody` property is specified.  \nFor more information, see [Configuring https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/CORS.html for an HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html) in the *API Gateway Developer Guide*.  \nIf `CorsConfiguration` is set both in an OpenAPI definition and at the property level, then AWS SAM merges both configuration sources with the properties taking precedence. If this property is set to `true`, then all origins are allowed.\n*Type*: String \\$1 [HttpApiCorsConfiguration](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapicorsconfiguration.html)  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Manages cross\\-origin resource sharing \\(CORS\\) for all your API Gateway HTTP APIs\\. Specify the domain to allow as a string, or specify an `HttpApiCorsConfiguration` object\\. Note that CORS requires AWS SAM to modify your OpenAPI definition, so CORS works only if the `DefinitionBody` property is specified\\.  \nFor more information, see [Configuring CORS for an HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html) in the *API Gateway Developer Guide*\\.  \nIf `CorsConfiguration` is set both in an OpenAPI definition and at the property level, then AWS SAM merges both configuration sources with the properties taking precedence\\. If this property is set to `true`, then all origins are allowed\\.\n*Type*: String \\| [HttpApiCorsConfiguration](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapicorsconfiguration.html)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "CorsConfiguration"
         },
         "DefaultRouteSettings": {
@@ -8570,11 +8719,11 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The default route settings for this HTTP API. These settings apply to all routes unless overridden by the `RouteSettings` property for certain routes.  \n*Type*: [RouteSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings)  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`RouteSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings) property of an `AWS::ApiGatewayV2::Stage` resource.",
+          "markdownDescription": "The default route settings for this HTTP API\\. These settings apply to all routes unless overridden by the `RouteSettings` property for certain routes\\.  \n*Type*: [RouteSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`RouteSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings) property of an `AWS::ApiGatewayV2::Stage` resource\\.",
           "title": "DefaultRouteSettings"
         },
         "DefinitionBody": {
-          "markdownDescription": "The OpenAPI definition that describes your HTTP API. If you don't specify a `DefinitionUri` or a `DefinitionBody`, AWS SAM generates a `DefinitionBody` for you based on your template configuration.  \n*Type*: JSON  \n*Required*: No  \n*CloudFormation compatibility*: This property is similar to the [`Body`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-body) property of an `AWS::ApiGatewayV2::Api` resource. If certain properties are provided, AWS SAM may insert content into or modify the `DefinitionBody` before it is passed to CloudFormation. Properties include `Auth` and an `EventSource` of type HttpApi for a corresponding `AWS::Serverless::Function` resource.",
+          "markdownDescription": "The OpenAPI definition that describes your HTTP API\\. If you don't specify a `DefinitionUri` or a `DefinitionBody`, AWS SAM generates a `DefinitionBody` for you based on your template configuration\\.  \n*Type*: JSON  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is similar to the [`Body`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-body) property of an `AWS::ApiGatewayV2::Api` resource\\. If certain properties are provided, AWS SAM may insert content into or modify the `DefinitionBody` before it is passed to AWS CloudFormation\\. Properties include `Auth` and an `EventSource` of type HttpApi for a corresponding `AWS::Serverless::Function` resource\\.",
           "title": "DefinitionBody",
           "type": "object"
         },
@@ -8587,11 +8736,11 @@
               "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_httpapi__DefinitionUri"
             }
           ],
-          "markdownDescription": "The Amazon Simple Storage Service (Amazon S3) URI, local file path, or location object of the the OpenAPI definition that defines the HTTP API. The Amazon S3 object that this property references must be a valid OpenAPI definition file. If you don't specify a `DefinitionUri` or a `DefinitionBody` are specified, AWS SAM generates a `DefinitionBody` for you based on your template configuration.  \nIf you provide a local file path, the template must go through the workflow that includes the `sam deploy` or `sam package` command for the definition to be transformed properly.  \nIntrinsic functions are not supported in external OpenApi definition files that you reference with `DefinitionUri`. To import an OpenApi definition into the template, use the `DefinitionBody` property with the [Include transform](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html).  \n*Type*: String \\$1 [HttpApiDefinition](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapidefinition.html)  \n*Required*: No  \n*CloudFormation compatibility*: This property is similar to the [`BodyS3Location`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-bodys3location) property of an `AWS::ApiGatewayV2::Api` resource. The nested Amazon S3 properties are named differently.",
+          "markdownDescription": "The Amazon Simple Storage Service \\(Amazon S3\\) URI, local file path, or location object of the the OpenAPI definition that defines the HTTP API\\. The Amazon S3 object that this property references must be a valid OpenAPI definition file\\. If you don't specify a `DefinitionUri` or a `DefinitionBody` are specified, AWS SAM generates a `DefinitionBody` for you based on your template configuration\\.  \nIf you provide a local file path, the template must go through the workflow that includes the `sam deploy` or `sam package` command for the definition to be transformed properly\\.  \nIntrinsic functions are not supported in external OpenApi definition files that you reference with `DefinitionUri`\\. To import an OpenApi definition into the template, use the `DefinitionBody` property with the [Include transform](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)\\.  \n*Type*: String \\| [HttpApiDefinition](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapidefinition.html)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is similar to the [`BodyS3Location`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-bodys3location) property of an `AWS::ApiGatewayV2::Api` resource\\. The nested Amazon S3 properties are named differently\\.",
           "title": "DefinitionUri"
         },
         "Description": {
-          "markdownDescription": "The description of the HTTP API resource.  \nWhen you specify `Description`, AWS SAM will modify the HTTP API resource's OpenApi definition by setting the `description` field. The following scenarios will result in an error:  \n+ The `DefinitionBody` property is specified with the `description` field set in the Open API definition \u2013 This results in a conflict of the `description` field that AWS SAM won't resolve.\n+ The `DefinitionUri` property is specified \u2013 AWS SAM won't modify an Open API definition that is retrieved from Amazon S3.\n*Type*: String  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "The description of the HTTP API resource\\.  \nWhen you specify `Description`, AWS SAM will modify the HTTP API resource's OpenApi definition by setting the `description` field\\. The following scenarios will result in an error:  \n+ The `DefinitionBody` property is specified with the `description` field set in the Open API definition \u2013 This results in a conflict of the `description` field that AWS SAM won't resolve\\.\n+ The `DefinitionUri` property is specified \u2013 AWS SAM won't modify an Open API definition that is retrieved from Amazon S3\\.\n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "Description",
           "type": "string"
         },
@@ -8601,7 +8750,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "Specifies whether clients can invoke your HTTP API by using the default `execute-api` endpoint `https://{api_id}.execute-api.{region}.amazonaws.com`. By default, clients can invoke your API with the default endpoint. To require that clients only use a custom domain name to invoke your API, disable the default endpoint.  \nTo use this property, you must specify the `DefinitionBody` property instead of the `DefinitionUri` property or define `x-amazon-apigateway-endpoint-configuration` with `disableExecuteApiEndpoint` in your OpenAPI definition.  \n*Type*: Boolean  \n*Required*: No  \n*CloudFormation compatibility*: This property is similar to the `[ DisableExecuteApiEndpoint](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-disableexecuteapiendpoint)` property of an `AWS::ApiGatewayV2::Api` resource. It is passed directly to the `disableExecuteApiEndpoint` property of an `[ x-amazon-apigateway-endpoint-configuration](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions-endpoint-configuration.html)` extension, which gets added to the ` [ Body](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-body)` property of an `AWS::ApiGatewayV2::Api` resource.",
+          "markdownDescription": "Specifies whether clients can invoke your HTTP API by using the default `execute-api` endpoint `https://{api_id}.execute-api.{region}.amazonaws.com`\\. By default, clients can invoke your API with the default endpoint\\. To require that clients only use a custom domain name to invoke your API, disable the default endpoint\\.  \nTo use this property, you must specify the `DefinitionBody` property instead of the `DefinitionUri` property or define `x-amazon-apigateway-endpoint-configuration` with `disableExecuteApiEndpoint` in your OpenAPI definition\\.  \n*Type*: Boolean  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is similar to the `[ DisableExecuteApiEndpoint](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-disableexecuteapiendpoint)` property of an `AWS::ApiGatewayV2::Api` resource\\. It is passed directly to the `disableExecuteApiEndpoint` property of an `[ x\\-amazon\\-apigateway\\-endpoint\\-configuration](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions-endpoint-configuration.html)` extension, which gets added to the ` [ Body](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-body)` property of an `AWS::ApiGatewayV2::Api` resource\\.",
           "title": "DisableExecuteApiEndpoint"
         },
         "Domain": {
@@ -8610,7 +8759,7 @@
               "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_httpapi__Domain"
             }
           ],
-          "markdownDescription": "Configures a custom domain for this API Gateway HTTP API.  \n*Type*: [HttpApiDomainConfiguration](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapidomainconfiguration.html)  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Configures a custom domain for this API Gateway HTTP API\\.  \n*Type*: [HttpApiDomainConfiguration](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapidomainconfiguration.html)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "Domain"
         },
         "FailOnWarnings": {
@@ -8619,7 +8768,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "Specifies whether to roll back the HTTP API creation (`true`) or not (`false`) when a warning is encountered. The default value is `false`.  \n*Type*: Boolean  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`FailOnWarnings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-failonwarnings) property of an `AWS::ApiGatewayV2::Api` resource.",
+          "markdownDescription": "Specifies whether to roll back the HTTP API creation \\(`true`\\) or not \\(`false`\\) when a warning is encountered\\. The default value is `false`\\.  \n*Type*: Boolean  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`FailOnWarnings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-failonwarnings) property of an `AWS::ApiGatewayV2::Api` resource\\.",
           "title": "FailOnWarnings"
         },
         "Name": {
@@ -8628,11 +8777,11 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The name of the HTTP API resource.  \nWhen you specify `Name`, AWS SAM will modify the HTTP API resource's OpenAPI definition by setting the `title` field. The following scenarios will result in an error:  \n+ The `DefinitionBody` property is specified with the `title` field set in the Open API definition \u2013 This results in a conflict of the `title` field that AWS SAM won't resolve.\n+ The `DefinitionUri` property is specified \u2013 AWS SAM won't modify an Open API definition that is retrieved from Amazon S3.\n*Type*: String  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "The name of the HTTP API resource\\.  \nWhen you specify `Name`, AWS SAM will modify the HTTP API resource's OpenAPI definition by setting the `title` field\\. The following scenarios will result in an error:  \n+ The `DefinitionBody` property is specified with the `title` field set in the Open API definition \u2013 This results in a conflict of the `title` field that AWS SAM won't resolve\\.\n+ The `DefinitionUri` property is specified \u2013 AWS SAM won't modify an Open API definition that is retrieved from Amazon S3\\.\n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "Name"
         },
         "PropagateTags": {
-          "markdownDescription": "Indicate whether or not to pass tags from the `Tags` property to your [AWS::Serverless::HttpApi](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-httpapi.html) generated resources. Specify `True` to propagate tags in your generated resources.  \n*Type*: Boolean  \n*Required*: No  \n*Default*: `False`  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Indicate whether or not to pass tags from the `Tags` property to your [AWS::Serverless::HttpApi](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-httpapi.html) generated resources\\. Specify `True` to propagate tags in your generated resources\\.  \n*Type*: Boolean  \n*Required*: No  \n*Default*: `False`  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "PropagateTags",
           "type": "boolean"
         },
@@ -8642,7 +8791,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The route settings, per route, for this HTTP API. For more information, see [Working with routes for HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-routes.html) in the *API Gateway Developer Guide*.  \n*Type*: [RouteSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings)  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`RouteSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings) property of an `AWS::ApiGatewayV2::Stage` resource.",
+          "markdownDescription": "The route settings, per route, for this HTTP API\\. For more information, see [Working with routes for HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-routes.html) in the *API Gateway Developer Guide*\\.  \n*Type*: [RouteSettings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`RouteSettings`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings) property of an `AWS::ApiGatewayV2::Stage` resource\\.",
           "title": "RouteSettings"
         },
         "StageName": {
@@ -8651,7 +8800,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The name of the API stage. If no name is specified, AWS SAM uses the `$default` stage from API Gateway.  \n*Type*: String  \n*Required*: No  \n*Default*: \\$1default  \n*CloudFormation compatibility*: This property is passed directly to the [`StageName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-stagename) property of an `AWS::ApiGatewayV2::Stage` resource.",
+          "markdownDescription": "The name of the API stage\\. If no name is specified, AWS SAM uses the `$default` stage from API Gateway\\.  \n*Type*: String  \n*Required*: No  \n*Default*: $default  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`StageName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-stagename) property of an `AWS::ApiGatewayV2::Stage` resource\\.",
           "title": "StageName"
         },
         "StageVariables": {
@@ -8660,11 +8809,11 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "A map that defines the stage variables. Variable names can have alphanumeric and underscore characters. The values must match [A-Za-z0-9-.\\$1\\$1:/?\\$1&=,]\\$1.  \n*Type*: [Json](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-stagevariables)  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`StageVariables`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-stagevariables) property of an `AWS::ApiGatewayV2::Stage` resource.",
+          "markdownDescription": "A map that defines the stage variables\\. Variable names can have alphanumeric and underscore characters\\. The values must match \\[A\\-Za\\-z0\\-9\\-\\.\\_\\~:/?\\#&=,\\]\\+\\.  \n*Type*: [Json](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-stagevariables)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`StageVariables`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-stagevariables) property of an `AWS::ApiGatewayV2::Stage` resource\\.",
           "title": "StageVariables"
         },
         "Tags": {
-          "markdownDescription": "A map (string to string) that specifies the tags to add to this API Gateway stage. Keys can be 1 to 128 Unicode characters in length and cannot include the prefix `aws:`. You can use any of the following characters: the set of Unicode letters, digits, whitespace, `_`, `.`, `/`, `=`, `+`, and `-`. Values can be 1 to 256 Unicode characters in length.  \n*Type*: Map  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.  \n*Additional notes*: The `Tags` property requires AWS SAM to modify your OpenAPI definition, so tags are added only if the `DefinitionBody` property is specified\u2014no tags are added if the `DefinitionUri` property is specified. AWS SAM automatically adds an `httpapi:createdBy:SAM` tag. Tags are also added to the `AWS::ApiGatewayV2::Stage` resource and the `AWS::ApiGatewayV2::DomainName` resource (if `DomainName` is specified).",
+          "markdownDescription": "A map \\(string to string\\) that specifies the tags to add to this API Gateway stage\\. Keys can be 1 to 128 Unicode characters in length and cannot include the prefix `aws:`\\. You can use any of the following characters: the set of Unicode letters, digits, whitespace, `_`, `.`, `/`, `=`, `+`, and `-`\\. Values can be 1 to 256 Unicode characters in length\\.  \n*Type*: Map  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.  \n*Additional notes*: The `Tags` property requires AWS SAM to modify your OpenAPI definition, so tags are added only if the `DefinitionBody` property is specified\u2014no tags are added if the `DefinitionUri` property is specified\\. AWS SAM automatically adds an `httpapi:createdBy:SAM` tag\\. Tags are also added to the `AWS::ApiGatewayV2::Stage` resource and the `AWS::ApiGatewayV2::DomainName` resource \\(if `DomainName` is specified\\)\\.",
           "title": "Tags",
           "type": "object"
         }
@@ -8737,7 +8886,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "Configures a custom distribution of the API custom domain name.  \n*Type*: String  \n*Required*: No  \n*Default*: Use the API Gateway distribution.  \n*CloudFormation compatibility*: This property is passed directly to the [`DNSName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget-1.html#cfn-route53-aliastarget-dnshostname) property of an `AWS::Route53::RecordSetGroup AliasTarget` resource.  \n*Additional notes*: The domain name of a [CloudFront distribution](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html).",
+          "markdownDescription": "Configures a custom distribution of the API custom domain name\\.  \n*Type*: String  \n*Required*: No  \n*Default*: Use the API Gateway distribution\\.  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`DNSName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget-1.html#cfn-route53-aliastarget-dnshostname) property of an `AWS::Route53::RecordSetGroup AliasTarget` resource\\.  \n*Additional notes*: The domain name of a [CloudFront distribution](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html)\\.",
           "title": "DistributionDomainName"
         },
         "EvaluateTargetHealth": {
@@ -8746,7 +8895,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "When EvaluateTargetHealth is true, an alias record inherits the health of the referenced AWS resource, such as an Elastic Load Balancing load balancer or another record in the hosted zone.  \n*Type*: Boolean  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`EvaluateTargetHealth`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html#cfn-route53-aliastarget-evaluatetargethealth) property of an `AWS::Route53::RecordSetGroup AliasTarget` resource.  \n*Additional notes*: You can't set EvaluateTargetHealth to true when the alias target is a CloudFront distribution.",
+          "markdownDescription": "When EvaluateTargetHealth is true, an alias record inherits the health of the referenced AWS resource, such as an Elastic Load Balancing load balancer or another record in the hosted zone\\.  \n*Type*: Boolean  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`EvaluateTargetHealth`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html#cfn-route53-aliastarget-evaluatetargethealth) property of an `AWS::Route53::RecordSetGroup AliasTarget` resource\\.  \n*Additional notes*: You can't set EvaluateTargetHealth to true when the alias target is a CloudFront distribution\\.",
           "title": "EvaluateTargetHealth"
         },
         "HostedZoneId": {
@@ -8755,7 +8904,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The ID of the hosted zone that you want to create records in.  \nSpecify either `HostedZoneName` or `HostedZoneId`, but not both. If you have multiple hosted zones with the same domain name, you must specify the hosted zone using `HostedZoneId`.  \n*Type*: String  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`HostedZoneId`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-hostedzoneid) property of an `AWS::Route53::RecordSetGroup RecordSet` resource.",
+          "markdownDescription": "The ID of the hosted zone that you want to create records in\\.  \nSpecify either `HostedZoneName` or `HostedZoneId`, but not both\\. If you have multiple hosted zones with the same domain name, you must specify the hosted zone using `HostedZoneId`\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`HostedZoneId`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-hostedzoneid) property of an `AWS::Route53::RecordSetGroup RecordSet` resource\\.",
           "title": "HostedZoneId"
         },
         "HostedZoneName": {
@@ -8764,46 +8913,30 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The name of the hosted zone that you want to create records in. You must include a trailing dot (for example, `www.example.com.`) as part of the `HostedZoneName`.  \nSpecify either `HostedZoneName` or `HostedZoneId`, but not both. If you have multiple hosted zones with the same domain name, you must specify the hosted zone using `HostedZoneId`.  \n*Type*: String  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`HostedZoneName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-hostedzonename) property of an `AWS::Route53::RecordSetGroup RecordSet` resource.",
+          "markdownDescription": "The name of the hosted zone that you want to create records in\\. You must include a trailing dot \\(for example, `www.example.com.`\\) as part of the `HostedZoneName`\\.  \nSpecify either `HostedZoneName` or `HostedZoneId`, but not both\\. If you have multiple hosted zones with the same domain name, you must specify the hosted zone using `HostedZoneId`\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`HostedZoneName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-hostedzonename) property of an `AWS::Route53::RecordSetGroup RecordSet` resource\\.",
           "title": "HostedZoneName"
         },
         "IpV6": {
-          "markdownDescription": "When this property is set, AWS SAM creates a `AWS::Route53::RecordSet` resource and sets [Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html#cfn-route53-recordset-type) to `AAAA` for the provided HostedZone.  \n*Type*: Boolean  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "When this property is set, AWS SAM creates a `AWS::Route53::RecordSet` resource and sets [Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html#cfn-route53-recordset-type) to `AAAA` for the provided HostedZone\\.  \n*Type*: Boolean  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "IpV6",
           "type": "boolean"
         },
         "Region": {
-          "__samPassThrough": {
-            "markdownDescriptionOverride": "*Latency-based resource record sets only:* The Amazon EC2 Region where you created the resource that this resource record set refers to. The resource typically is an AWS resource, such as an EC2 instance or an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.  \nWhen Amazon Route\u00a053 receives a DNS query for a domain name and type for which you have created latency resource record sets, Route\u00a053 selects the latency resource record set that has the lowest latency between the end user and the associated Amazon EC2 Region. Route\u00a053 then returns the value that is associated with the selected resource record set.  \nNote the following:  \n+ You can only specify one `ResourceRecord` per latency resource record set.\n+ You can only create one latency resource record set for each Amazon EC2 Region.\n+ You aren't required to create latency resource record sets for all Amazon EC2 Regions. Route\u00a053 will choose the region with the best latency from among the regions that you create latency resource record sets for.\n+ You can't create non-latency resource record sets that have the same values for the `Name` and `Type` elements as latency resource record sets.\n*Type*: String  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the `[ Region](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-region)` property of an `AWS::Route53::RecordSetGroup` `RecordSet` data type.",
-            "schemaPath": [
-              "definitions",
-              "AWS::Route53::RecordSetGroup.RecordSet",
-              "properties",
-              "Region"
-            ]
-          },
           "allOf": [
             {
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
+          "markdownDescription": "*Latency\\-based resource record sets only:* The Amazon EC2 Region where you created the resource that this resource record set refers to\\. The resource typically is an AWS resource, such as an EC2 instance or an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type\\.  \nWhen Amazon Route\u00a053 receives a DNS query for a domain name and type for which you have created latency resource record sets, Route\u00a053 selects the latency resource record set that has the lowest latency between the end user and the associated Amazon EC2 Region\\. Route\u00a053 then returns the value that is associated with the selected resource record set\\.  \nNote the following:  \n+ You can only specify one `ResourceRecord` per latency resource record set\\.\n+ You can only create one latency resource record set for each Amazon EC2 Region\\.\n+ You aren't required to create latency resource record sets for all Amazon EC2 Regions\\. Route\u00a053 will choose the region with the best latency from among the regions that you create latency resource record sets for\\.\n+ You can't create non\\-latency resource record sets that have the same values for the `Name` and `Type` elements as latency resource record sets\\.\n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the `[ Region](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-region)` property of an `AWS::Route53::RecordSetGroup` `RecordSet` data type\\.",
           "title": "Region"
         },
         "SetIdentifier": {
-          "__samPassThrough": {
-            "markdownDescriptionOverride": "*Resource record sets that have a routing policy other than simple:* An identifier that differentiates among multiple resource record sets that have the same combination of name and type, such as multiple weighted resource record sets named acme.example.com that have a type of A. In a group of resource record sets that have the same name and type, the value of `SetIdentifier` must be unique for each resource record set.  \nFor information about routing policies, see [Choosing a routing policy](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html) in the *Amazon Route\u00a053 Developer Guide*.  \n*Type*: String  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the `[ SetIdentifier](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-setidentifier)` property of an `AWS::Route53::RecordSetGroup` `RecordSet` data type.",
-            "schemaPath": [
-              "definitions",
-              "AWS::Route53::RecordSetGroup.RecordSet",
-              "properties",
-              "SetIdentifier"
-            ]
-          },
           "allOf": [
             {
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
+          "markdownDescription": "*Resource record sets that have a routing policy other than simple:* An identifier that differentiates among multiple resource record sets that have the same combination of name and type, such as multiple weighted resource record sets named acme\\.example\\.com that have a type of A\\. In a group of resource record sets that have the same name and type, the value of `SetIdentifier` must be unique for each resource record set\\.  \nFor information about routing policies, see [Choosing a routing policy](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html) in the *Amazon Route\u00a053 Developer Guide*\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the `[ SetIdentifier](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-setidentifier)` property of an `AWS::Route53::RecordSetGroup` `RecordSet` data type\\.",
           "title": "SetIdentifier"
         }
       },
@@ -9531,7 +9664,7 @@
       "additionalProperties": false,
       "properties": {
         "PropagateTags": {
-          "markdownDescription": "Indicate whether or not to pass tags from the `Tags` property to your [AWS::Serverless::StateMachine](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-statemachine.html) generated resources. Specify `True` to propagate tags in your generated resources.  \n*Type*: Boolean  \n*Required*: No  \n*Default*: `False`  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Indicate whether or not to pass tags from the `Tags` property to your [AWS::Serverless::StateMachine](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-statemachine.html) generated resources\\. Specify `True` to propagate tags in your generated resources\\.  \n*Type*: Boolean  \n*Required*: No  \n*Default*: `False`  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "PropagateTags",
           "type": "boolean"
         }
@@ -9546,12 +9679,12 @@
           "$ref": "#/definitions/PassThroughProp"
         },
         "Definition": {
-          "markdownDescription": "The state machine definition is an object, where the format of the object matches the format of your AWS SAM template file, for example, JSON or YAML. State machine definitions adhere to the [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).  \nFor an example of an inline state machine definition, see [Examples](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/#sam-resource-statemachine--examples.html#sam-resource-statemachine--examples).  \nYou must provide either a `Definition` or a `DefinitionUri`.  \n*Type*: Map  \n*Required*: Conditional  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "The state machine definition is an object, where the format of the object matches the format of your AWS SAM template file, for example, JSON or YAML\\. State machine definitions adhere to the [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html)\\.  \nFor an example of an inline state machine definition, see [Examples](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/#sam-resource-statemachine--examples.html#sam-resource-statemachine--examples)\\.  \nYou must provide either a `Definition` or a `DefinitionUri`\\.  \n*Type*: Map  \n*Required*: Conditional  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "Definition",
           "type": "object"
         },
         "DefinitionSubstitutions": {
-          "markdownDescription": "A string-to-string map that specifies the mappings for placeholder variables in the state machine definition. This enables you to inject values obtained at runtime (for example, from intrinsic functions) into the state machine definition.  \n*Type*: Map  \n*Required*: No  \n*CloudFormation compatibility*: This property is similar to the [`DefinitionSubstitutions`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-definitionsubstitutions) property of an `AWS::StepFunctions::StateMachine` resource. If any intrinsic functions are specified in an inline state machine definition, AWS SAM adds entries to this property to inject them into the state machine definition.",
+          "markdownDescription": "A string\\-to\\-string map that specifies the mappings for placeholder variables in the state machine definition\\. This enables you to inject values obtained at runtime \\(for example, from intrinsic functions\\) into the state machine definition\\.  \n*Type*: Map  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is similar to the [`DefinitionSubstitutions`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-definitionsubstitutions) property of an `AWS::StepFunctions::StateMachine` resource\\. If any intrinsic functions are specified in an inline state machine definition, AWS SAM adds entries to this property to inject them into the state machine definition\\.",
           "title": "DefinitionSubstitutions",
           "type": "object"
         },
@@ -9564,7 +9697,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The Amazon Simple Storage Service (Amazon S3) URI or local file path of the state machine definition written in the [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).  \nIf you provide a local file path, the template must go through the workflow that includes the `sam deploy` or `sam package` command to correctly transform the definition. To do this, you must use version 0.52.0 or later of the AWS SAM CLI.  \nYou must provide either a `Definition` or a `DefinitionUri`.  \n*Type*: String \\$1 [S3Location](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-definitions3location)  \n*Required*: Conditional  \n*CloudFormation compatibility*: This property is passed directly to the [`DefinitionS3Location`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-definitions3location) property of an `AWS::StepFunctions::StateMachine` resource.",
+          "markdownDescription": "The Amazon Simple Storage Service \\(Amazon S3\\) URI or local file path of the state machine definition written in the [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html)\\.  \nIf you provide a local file path, the template must go through the workflow that includes the `sam deploy` or `sam package` command to correctly transform the definition\\. To do this, you must use version 0\\.52\\.0 or later of the AWS SAM CLI\\.  \nYou must provide either a `Definition` or a `DefinitionUri`\\.  \n*Type*: String \\| [S3Location](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-definitions3location)  \n*Required*: Conditional  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`DefinitionS3Location`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-definitions3location) property of an `AWS::StepFunctions::StateMachine` resource\\.",
           "title": "DefinitionUri"
         },
         "DeploymentPreference": {
@@ -9590,7 +9723,7 @@
               }
             ]
           },
-          "markdownDescription": "Specifies the events that trigger this state machine. Events consist of a type and a set of properties that depend on the type.  \n*Type*: [EventSource](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-statemachine-statemachineeventsource.html)  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Specifies the events that trigger this state machine\\. Events consist of a type and a set of properties that depend on the type\\.  \n*Type*: [EventSource](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-statemachine-statemachineeventsource.html)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "Events",
           "type": "object"
         },
@@ -9600,7 +9733,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "Defines which execution history events are logged and where they are logged.  \n*Type*: [LoggingConfiguration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-loggingconfiguration)  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`LoggingConfiguration`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-loggingconfiguration) property of an `AWS::StepFunctions::StateMachine` resource.",
+          "markdownDescription": "Defines which execution history events are logged and where they are logged\\.  \n*Type*: [LoggingConfiguration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-loggingconfiguration)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`LoggingConfiguration`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-loggingconfiguration) property of an `AWS::StepFunctions::StateMachine` resource\\.",
           "title": "Logging"
         },
         "Name": {
@@ -9609,7 +9742,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The name of the state machine.  \n*Type*: String  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`StateMachineName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-statemachinename) property of an `AWS::StepFunctions::StateMachine` resource.",
+          "markdownDescription": "The name of the state machine\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`StateMachineName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-statemachinename) property of an `AWS::StepFunctions::StateMachine` resource\\.",
           "title": "Name"
         },
         "PermissionsBoundary": {
@@ -9618,7 +9751,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The ARN of a permissions boundary to use for this state machine's execution role. This property only works if the role is generated for you.  \n*Type*: String  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`PermissionsBoundary`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-permissionsboundary) property of an `AWS::IAM::Role` resource.",
+          "markdownDescription": "The ARN of a permissions boundary to use for this state machine's execution role\\. This property only works if the role is generated for you\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`PermissionsBoundary`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-permissionsboundary) property of an `AWS::IAM::Role` resource\\.",
           "title": "PermissionsBoundary"
         },
         "Policies": {
@@ -9643,11 +9776,11 @@
               "type": "array"
             }
           ],
-          "markdownDescription": "Permission policies for this state machine. Policies will be appended to the state machine's default AWS Identity and Access Management (https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/IAM.html) execution role.  \nThis property accepts a single value or list of values. Allowed values include:  \n+ [AWS SAM\u00a0policy templates](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html).\n+ The ARN of an [AWS managed policy](https://docs.aws.amazon.com/https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/IAM.html/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) or [customer managed policy](https://docs.aws.amazon.com/https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/IAM.html/latest/UserGuide/access_policies_managed-vs-inline.html#customer-managed-policies).\n+ The name of an AWS managed policy from the following [ list](https://github.com/aws/serverless-application-model/blob/develop/samtranslator/internal/data/aws_managed_policies.json).\n+ An [ inline https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/IAM.html policy](https://docs.aws.amazon.com/https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/IAM.html/latest/UserGuide/access_policies_managed-vs-inline.html#inline-policies) formatted in YAML as a map.\nIf you set the `Role` property, this property is ignored.\n*Type*: String \\$1 List \\$1 Map  \n*Required*: No  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Permission policies for this state machine\\. Policies will be appended to the state machine's default AWS Identity and Access Management \\(IAM\\) execution role\\.  \nThis property accepts a single value or list of values\\. Allowed values include:  \n+ [AWS SAM\u00a0policy templates](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html)\\.\n+ The ARN of an [AWS managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) or [customer managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#customer-managed-policies)\\.\n+ The name of an AWS managed policy from the following [ list](https://github.com/aws/serverless-application-model/blob/develop/samtranslator/internal/data/aws_managed_policies.json)\\.\n+ An [ inline IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#inline-policies) formatted in YAML as a map\\.\nIf you set the `Role` property, this property is ignored\\.\n*Type*: String \\| List \\| Map  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "Policies"
         },
         "PropagateTags": {
-          "markdownDescription": "Indicate whether or not to pass tags from the `Tags` property to your [AWS::Serverless::StateMachine](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-statemachine.html) generated resources. Specify `True` to propagate tags in your generated resources.  \n*Type*: Boolean  \n*Required*: No  \n*Default*: `False`  \n*CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an CloudFormation equivalent.",
+          "markdownDescription": "Indicate whether or not to pass tags from the `Tags` property to your [AWS::Serverless::StateMachine](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-statemachine.html) generated resources\\. Specify `True` to propagate tags in your generated resources\\.  \n*Type*: Boolean  \n*Required*: No  \n*Default*: `False`  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
           "title": "PropagateTags",
           "type": "boolean"
         },
@@ -9657,7 +9790,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The ARN of an IAM role to use as this state machine's execution role.  \n*Type*: String  \n*Required*: Conditional  \n*CloudFormation compatibility*: This property is passed directly to the `[ RoleArn](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-rolearn)` property of an `AWS::StepFunctions::StateMachine` resource.",
+          "markdownDescription": "The ARN of an IAM role to use as this state machine's execution role\\.  \n*Type*: String  \n*Required*: Conditional  \n*AWS CloudFormation compatibility*: This property is passed directly to the `[ RoleArn](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-rolearn)` property of an `AWS::StepFunctions::StateMachine` resource\\.",
           "title": "Role"
         },
         "RolePath": {
@@ -9666,11 +9799,11 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The path to the state machine's IAM execution role.  \nUse this property when the role is generated for you. Do not use when the role is specified with the `Role` property.  \n*Type*: String  \n*Required*: Conditional  \n*CloudFormation compatibility*: This property is passed directly to the [`Path`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-path) property of an `AWS::IAM::Role` resource.",
+          "markdownDescription": "The path to the state machine's IAM execution role\\.  \nUse this property when the role is generated for you\\. Do not use when the role is specified with the `Role` property\\.  \n*Type*: String  \n*Required*: Conditional  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`Path`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-path) property of an `AWS::IAM::Role` resource\\.",
           "title": "RolePath"
         },
         "Tags": {
-          "markdownDescription": "A string-to-string map that specifies the tags added to the state machine and the corresponding execution role. For information about valid keys and values for tags, see the [Tags](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-tags) property of an [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html) resource.  \n*Type*: Map  \n*Required*: No  \n*CloudFormation compatibility*: This property is similar to the [`Tags`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-tags) property of an `AWS::StepFunctions::StateMachine` resource. AWS SAM automatically adds a `stateMachine:createdBy:SAM` tag to this resource, and to the default role that is generated for it.",
+          "markdownDescription": "A string\\-to\\-string map that specifies the tags added to the state machine and the corresponding execution role\\. For information about valid keys and values for tags, see the [Tags](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-tags) property of an [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html) resource\\.  \n*Type*: Map  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is similar to the [`Tags`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-tags) property of an `AWS::StepFunctions::StateMachine` resource\\. AWS SAM automatically adds a `stateMachine:createdBy:SAM` tag to this resource, and to the default role that is generated for it\\.",
           "title": "Tags",
           "type": "object"
         },
@@ -9680,7 +9813,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "Selects whether or not AWS X-Ray is enabled for the state machine. For more information about using X-Ray with Step Functions, see [AWS X-Ray and Step Functions](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-xray-tracing.html) in the *AWS Step Functions Developer Guide*.  \n*Type*: [TracingConfiguration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-tracingconfiguration)  \n*Required*: No  \n*CloudFormation compatibility*: This property is passed directly to the [`TracingConfiguration`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-tracingconfiguration) property of an `AWS::StepFunctions::StateMachine` resource.",
+          "markdownDescription": "Selects whether or not AWS X\\-Ray is enabled for the state machine\\. For more information about using X\\-Ray with Step Functions, see [AWS X\\-Ray and Step Functions](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-xray-tracing.html) in the *AWS Step Functions Developer Guide*\\.  \n*Type*: [TracingConfiguration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-tracingconfiguration)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`TracingConfiguration`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-tracingconfiguration) property of an `AWS::StepFunctions::StateMachine` resource\\.",
           "title": "Tracing"
         },
         "Type": {
@@ -9689,7 +9822,7 @@
               "$ref": "#/definitions/PassThroughProp"
             }
           ],
-          "markdownDescription": "The type of the state machine.  \n*Valid values*: `STANDARD` or `EXPRESS`  \n*Type*: String  \n*Required*: No  \n*Default*: `STANDARD`  \n*CloudFormation compatibility*: This property is passed directly to the [`StateMachineType`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-statemachinetype) property of an `AWS::StepFunctions::StateMachine` resource.",
+          "markdownDescription": "The type of the state machine\\.  \n*Valid values*: `STANDARD` or `EXPRESS`  \n*Type*: String  \n*Required*: No  \n*Default*: `STANDARD`  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`StateMachineType`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html#cfn-stepfunctions-statemachine-statemachinetype) property of an `AWS::StepFunctions::StateMachine` resource\\.",
           "title": "Type"
         },
         "UseAliasAsEventTarget": {
@@ -10131,6 +10264,434 @@
       },
       "title": "ScheduleV2EventProperties",
       "type": "object"
+    },
+    "samtranslator__internal__schema_source__aws_serverless_websocketapi__Domain": {
+      "additionalProperties": false,
+      "properties": {
+        "BasePath": {
+          "items": {
+            "type": "string"
+          },
+          "markdownDescription": "A list of the basepaths to configure with the Amazon API Gateway domain name\\.  \n*Type*: List  \n*Required*: No  \n*Default*: /  \n*AWS CloudFormation compatibility*: This property is similar to the [`ApiMappingKey`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-apimapping.html#cfn-apigatewayv2-apimapping-apimappingkey) property of an `AWS::ApiGatewayV2::ApiMapping` resource\\. AWS SAM creates multiple `AWS::ApiGatewayV2::ApiMapping` resources, one per value specified in this property\\.",
+          "title": "BasePath",
+          "type": "array"
+        },
+        "CertificateArn": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "The Amazon Resource Name \\(ARN\\) of an AWS managed certificate for this domain name's endpoint\\. AWS Certificate Manager is the only supported source\\.  \n*Type*: String  \n*Required*: Yes  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`CertificateArn`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-domainname-domainnameconfiguration.html#cfn-apigatewayv2-domainname-domainnameconfiguration-certificatearn) property of an `AWS::ApiGateway2::DomainName DomainNameConfiguration` resource\\.",
+          "title": "CertificateArn"
+        },
+        "DomainName": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "The custom domain name for your API Gateway API\\. Uppercase letters are not supported\\.  \nAWS SAM generates an `AWS::ApiGatewayV2::DomainName` resource when this property is set\\. For information about this scenario, see [DomainName property is specified](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources-httpapi.html#sam-specification-generated-resources-httpapi-domain-name)\\. For information about generated AWS CloudFormation resources, see [Generated AWS CloudFormation resources for AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources.html)\\.  \n*Type*: String  \n*Required*: Yes  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`DomainName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-domainname) property of an `AWS::ApiGateway2::DomainName` resource\\.",
+          "title": "DomainName"
+        },
+        "EndpointConfiguration": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "enum": [
+                "REGIONAL"
+              ],
+              "type": "string"
+            }
+          ],
+          "markdownDescription": "Defines the type of API Gateway endpoint to map to the custom domain\\. The value of this property determines how the `CertificateArn` property is mapped in AWS CloudFormation\\.  \nThe only valid value for HTTP APIs is `REGIONAL`\\.  \n*Type*: String  \n*Required*: No  \n*Default*: `REGIONAL`  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
+          "title": "EndpointConfiguration"
+        },
+        "MutualTlsAuthentication": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "The mutual transport layer security \\(TLS\\) authentication configuration for a custom domain name\\.  \n*Type*: [MutualTlsAuthentication](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-mutualtlsauthentication)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`MutualTlsAuthentication`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-mutualtlsauthentication) property of an `AWS::ApiGatewayV2::DomainName` resource\\.",
+          "title": "MutualTlsAuthentication"
+        },
+        "OwnershipVerificationCertificateArn": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "The ARN of the public certificate issued by ACM to validate ownership of your custom domain\\. Required only when you configure mutual TLS and you specify an ACM imported or private CA certificate ARN for the `CertificateArn`\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`OwnershipVerificationCertificateArn`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-domainname-domainnameconfiguration.html#cfn-apigatewayv2-domainname-domainnameconfiguration-ownershipverificationcertificatearn) property of the `AWS::ApiGatewayV2::DomainName` `DomainNameConfiguration` data type\\.",
+          "title": "OwnershipVerificationCertificateArn"
+        },
+        "Route53": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_websocketapi__Route53"
+            }
+          ],
+          "markdownDescription": "Defines an Amazon Route\u00a053 configuration\\.  \n*Type*: [Route53Configuration](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-route53configuration.html)  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
+          "title": "Route53"
+        },
+        "SecurityPolicy": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "The TLS version of the security policy for this domain name\\.  \nThe only valid value for HTTP APIs is `TLS_1_2`\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`SecurityPolicy`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-domainname-domainnameconfiguration.html#cfn-apigatewayv2-domainname-domainnameconfiguration-securitypolicy) property of the `AWS::ApiGatewayV2::DomainName` `DomainNameConfiguration` data type\\.",
+          "title": "SecurityPolicy"
+        }
+      },
+      "required": [
+        "CertificateArn",
+        "DomainName"
+      ],
+      "title": "Domain",
+      "type": "object"
+    },
+    "samtranslator__internal__schema_source__aws_serverless_websocketapi__Globals": {
+      "additionalProperties": false,
+      "properties": {
+        "AccessLogSettings": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "AccessLogSettings"
+        },
+        "ApiKeySelectionExpression": {
+          "markdownDescription": "TODO",
+          "title": "ApiKeySelectionExpression",
+          "type": "string"
+        },
+        "DefaultRouteSettings": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "DefaultRouteSettings"
+        },
+        "DisableExecuteApiEndpoint": {
+          "markdownDescription": "TODO",
+          "title": "DisableExecuteApiEndpoint",
+          "type": "boolean"
+        },
+        "DisableSchemaValidation": {
+          "markdownDescription": "TODO",
+          "title": "DisableSchemaValidation",
+          "type": "boolean"
+        },
+        "Domain": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_websocketapi__Domain"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "Domain"
+        },
+        "IpAddressType": {
+          "markdownDescription": "TODO",
+          "title": "IpAddressType",
+          "type": "string"
+        },
+        "PropagateTags": {
+          "markdownDescription": "TODO",
+          "title": "PropagateTags",
+          "type": "boolean"
+        },
+        "RouteSelectionExpression": {
+          "markdownDescription": "TODO",
+          "title": "RouteSelectionExpression",
+          "type": "string"
+        },
+        "RouteSettings": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "RouteSettings"
+        },
+        "StageVariables": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "StageVariables"
+        },
+        "Tags": {
+          "markdownDescription": "TODO",
+          "title": "Tags",
+          "type": "object"
+        }
+      },
+      "title": "Globals",
+      "type": "object"
+    },
+    "samtranslator__internal__schema_source__aws_serverless_websocketapi__Properties": {
+      "additionalProperties": false,
+      "properties": {
+        "AccessLogSettings": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "AccessLogSettings"
+        },
+        "ApiKeySelectionExpression": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "ApiKeySelectionExpression"
+        },
+        "Auth": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AuthConfig"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "Auth"
+        },
+        "DefaultRouteSettings": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "DefaultRouteSettings"
+        },
+        "Description": {
+          "markdownDescription": "TODO",
+          "title": "Description",
+          "type": "string"
+        },
+        "DisableExecuteApiEndpoint": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "DisableExecuteApiEndpoint"
+        },
+        "DisableSchemaValidation": {
+          "markdownDescription": "TODO",
+          "title": "DisableSchemaValidation",
+          "type": "boolean"
+        },
+        "Domain": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_websocketapi__Domain"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "Domain"
+        },
+        "IpAddressType": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "IpAddressType"
+        },
+        "Name": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "Name"
+        },
+        "PropagateTags": {
+          "markdownDescription": "TODO",
+          "title": "PropagateTags",
+          "type": "boolean"
+        },
+        "RouteSelectionExpression": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "RouteSelectionExpression"
+        },
+        "RouteSettings": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "RouteSettings"
+        },
+        "Routes": {
+          "additionalProperties": {
+            "$ref": "#/definitions/WebSocketApiRoute"
+          },
+          "markdownDescription": "TODO",
+          "title": "Routes",
+          "type": "object"
+        },
+        "StageName": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "StageName"
+        },
+        "StageVariables": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "TODO",
+          "title": "StageVariables"
+        },
+        "Tags": {
+          "markdownDescription": "TODO",
+          "title": "Tags",
+          "type": "object"
+        }
+      },
+      "required": [
+        "Routes",
+        "RouteSelectionExpression"
+      ],
+      "title": "Properties",
+      "type": "object"
+    },
+    "samtranslator__internal__schema_source__aws_serverless_websocketapi__Resource": {
+      "additionalProperties": false,
+      "properties": {
+        "Condition": {
+          "$ref": "#/definitions/PassThroughProp"
+        },
+        "DeletionPolicy": {
+          "$ref": "#/definitions/PassThroughProp"
+        },
+        "DependsOn": {
+          "$ref": "#/definitions/PassThroughProp"
+        },
+        "IgnoreGlobals": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "title": "Ignoreglobals"
+        },
+        "Metadata": {
+          "$ref": "#/definitions/PassThroughProp"
+        },
+        "Properties": {
+          "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_websocketapi__Properties"
+        },
+        "Type": {
+          "enum": [
+            "AWS::Serverless::WebSocketApi"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "UpdateReplacePolicy": {
+          "$ref": "#/definitions/PassThroughProp"
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "title": "Resource",
+      "type": "object"
+    },
+    "samtranslator__internal__schema_source__aws_serverless_websocketapi__Route53": {
+      "additionalProperties": false,
+      "properties": {
+        "EvaluateTargetHealth": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "When EvaluateTargetHealth is true, an alias record inherits the health of the referenced AWS resource, such as an Elastic Load Balancing load balancer or another record in the hosted zone\\.  \n*Type*: Boolean  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`EvaluateTargetHealth`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html#cfn-route53-aliastarget-evaluatetargethealth) property of an `AWS::Route53::RecordSetGroup AliasTarget` resource\\.  \n*Additional notes*: You can't set EvaluateTargetHealth to true when the alias target is a CloudFront distribution\\.",
+          "title": "EvaluateTargetHealth"
+        },
+        "HostedZoneId": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "The ID of the hosted zone that you want to create records in\\.  \nSpecify either `HostedZoneName` or `HostedZoneId`, but not both\\. If you have multiple hosted zones with the same domain name, you must specify the hosted zone using `HostedZoneId`\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`HostedZoneId`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-hostedzoneid) property of an `AWS::Route53::RecordSetGroup RecordSet` resource\\.",
+          "title": "HostedZoneId"
+        },
+        "HostedZoneName": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "The name of the hosted zone that you want to create records in\\. You must include a trailing dot \\(for example, `www.example.com.`\\) as part of the `HostedZoneName`\\.  \nSpecify either `HostedZoneName` or `HostedZoneId`, but not both\\. If you have multiple hosted zones with the same domain name, you must specify the hosted zone using `HostedZoneId`\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the [`HostedZoneName`](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-hostedzonename) property of an `AWS::Route53::RecordSetGroup RecordSet` resource\\.",
+          "title": "HostedZoneName"
+        },
+        "IpV6": {
+          "markdownDescription": "When this property is set, AWS SAM creates a `AWS::Route53::RecordSet` resource and sets [Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html#cfn-route53-recordset-type) to `AAAA` for the provided HostedZone\\.  \n*Type*: Boolean  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is unique to AWS SAM and doesn't have an AWS CloudFormation equivalent\\.",
+          "title": "IpV6",
+          "type": "boolean"
+        },
+        "Region": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "*Latency\\-based resource record sets only:* The Amazon EC2 Region where you created the resource that this resource record set refers to\\. The resource typically is an AWS resource, such as an EC2 instance or an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type\\.  \nWhen Amazon Route\u00a053 receives a DNS query for a domain name and type for which you have created latency resource record sets, Route\u00a053 selects the latency resource record set that has the lowest latency between the end user and the associated Amazon EC2 Region\\. Route\u00a053 then returns the value that is associated with the selected resource record set\\.  \nNote the following:  \n+ You can only specify one `ResourceRecord` per latency resource record set\\.\n+ You can only create one latency resource record set for each Amazon EC2 Region\\.\n+ You aren't required to create latency resource record sets for all Amazon EC2 Regions\\. Route\u00a053 will choose the region with the best latency from among the regions that you create latency resource record sets for\\.\n+ You can't create non\\-latency resource record sets that have the same values for the `Name` and `Type` elements as latency resource record sets\\.\n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the `[ Region](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-region)` property of an `AWS::Route53::RecordSetGroup` `RecordSet` data type\\.",
+          "title": "Region"
+        },
+        "SetIdentifier": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PassThroughProp"
+            }
+          ],
+          "markdownDescription": "*Resource record sets that have a routing policy other than simple:* An identifier that differentiates among multiple resource record sets that have the same combination of name and type, such as multiple weighted resource record sets named acme\\.example\\.com that have a type of A\\. In a group of resource record sets that have the same name and type, the value of `SetIdentifier` must be unique for each resource record set\\.  \nFor information about routing policies, see [Choosing a routing policy](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html) in the *Amazon Route\u00a053 Developer Guide*\\.  \n*Type*: String  \n*Required*: No  \n*AWS CloudFormation compatibility*: This property is passed directly to the `[ SetIdentifier](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-1.html#cfn-route53-recordset-setidentifier)` property of an `AWS::Route53::RecordSetGroup` `RecordSet` data type\\.",
+          "title": "SetIdentifier"
+        }
+      },
+      "title": "Route53",
+      "type": "object"
     }
   },
   "properties": {
@@ -10160,6 +10721,9 @@
           },
           {
             "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_httpapi__Resource"
+          },
+          {
+            "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_websocketapi__Resource"
           },
           {
             "$ref": "#/definitions/samtranslator__internal__schema_source__aws_serverless_application__Resource"
