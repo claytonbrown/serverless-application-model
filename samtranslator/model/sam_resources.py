@@ -1915,24 +1915,24 @@ class SamWebSocketApi(SamResourceMacro):
         "Tags": PropertyType(False, IS_DICT),
     }
 
-    ApiKeySelectionExpression: Optional[Intrinsicable[str]]
-    AccessLogSettings: Optional[Dict[str, Any]]
-    Auth: Optional[Dict[str, Any]]
-    DefaultRouteSettings: Optional[Dict[str, Any]]
-    Description: Optional[Intrinsicable[str]]
-    DisableExecuteApiEndpoint: Optional[Intrinsicable[bool]]
-    DisableSchemaValidation: Optional[Intrinsicable[bool]]
-    Domain: Optional[Dict[str, Any]]
-    FailOnWarnings: Optional[Intrinsicable[bool]]
-    IpAddressType: Optional[Intrinsicable[str]]
-    Name: Optional[str]
-    PropagateTags: Optional[bool]
-    Routes: Dict[str, Dict[str, Any]]
-    RouteSettings: Optional[Dict[str, Any]]
+    ApiKeySelectionExpression: Intrinsicable[str] | None
+    AccessLogSettings: dict[str, Any] | None
+    Auth: dict[str, Any] | None
+    DefaultRouteSettings: dict[str, Any] | None
+    Description: Intrinsicable[str] | None
+    DisableExecuteApiEndpoint: Intrinsicable[bool] | None
+    DisableSchemaValidation: Intrinsicable[bool] | None
+    Domain: dict[str, Any] | None
+    FailOnWarnings: Intrinsicable[bool] | None
+    IpAddressType: Intrinsicable[str] | None
+    Name: str | None
+    PropagateTags: bool | None
+    Routes: dict[str, dict[str, Any]]
+    RouteSettings: dict[str, Any] | None
     RouteSelectionExpression: str
-    StageName: Optional[str]
-    StageVariables: Optional[Dict[str, Intrinsicable[str]]]
-    Tags: Optional[Dict[str, Any]]
+    StageName: str | None
+    StageVariables: dict[str, Intrinsicable[str]] | None
+    Tags: dict[str, Any] | None
 
     referable_properties = {
         "Stage": ApiGatewayV2Stage.resource_type,
@@ -1975,7 +1975,7 @@ class SamWebSocketApi(SamResourceMacro):
             tags=self.Tags,
         )
 
-        resources: List[Resource] = api_generator._to_cloudformation(kwargs.get("route53setrecordgroups", {}))
+        resources: list[Resource] = api_generator._to_cloudformation(kwargs.get("route53setrecordgroups", {}))
 
         self.propagate_tags(resources, self.Tags, self.PropagateTags)
 
