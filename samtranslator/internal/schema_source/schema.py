@@ -29,7 +29,7 @@ class Globals(BaseModel):
     Function: aws_serverless_function.Globals | None
     Api: aws_serverless_api.Globals | None
     HttpApi: aws_serverless_httpapi.Globals | None
-    WebsocketApi: aws_serverless_websocketapi.Globals | None
+    WebSocketApi: aws_serverless_websocketapi.Globals | None
     SimpleTable: aws_serverless_simpletable.Globals | None
     StateMachine: aws_serverless_statemachine.Globals | None
     LayerVersion: aws_serverless_layerversion.Globals | None
