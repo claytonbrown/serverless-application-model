@@ -33,7 +33,9 @@ class WebSocketApiGenerator(ApiV2Generator):
         self,
         logical_id: str,
         stage_name: str | None,
-        stage_variables: dict[str, Intrinsicable[str]] | None,  # I tried to keep presence of = None consistent with http
+        stage_variables: (
+            dict[str, Intrinsicable[str]] | None
+        ),  # I tried to keep presence of = None consistent with http
         depends_on: list[str] | None,
         name: str | None,
         routes: dict[str, dict[str, Any]],
