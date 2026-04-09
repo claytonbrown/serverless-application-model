@@ -58,7 +58,7 @@ class ApiGatewayV2WebSocketApi(ApiGatewayV2Api):
 
     runtime_attrs = {"websocket_api_id": lambda self: ref(self.logical_id)}
 
-    def assign_tags(self, tags: Dict[str, Any]) -> None:
+    def assign_tags(self, tags: dict[str, Any]) -> None:
         """Overriding default 'assign_tags' function in Resource class
 
         Function to assign tags to the resource
