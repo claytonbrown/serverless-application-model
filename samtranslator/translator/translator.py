@@ -98,9 +98,9 @@ class Translator:
                     )
                     if not resolved_function_name:
                         continue
-                    self.function_names.setdefault(api_name, "")
-                    self.function_names[api_name] += str(resolved_function_name)
-        return self.function_names
+                    self.function_names.setdefault(api_name, [])
+                    self.function_names[api_name].append(str(resolved_function_name))
+        return {api: "".join(names) for api, names in self.function_names.items()}
 
     def translate(  # noqa: PLR0912, PLR0915
         self,
